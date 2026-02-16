@@ -64,6 +64,24 @@ npm run build
 npm start
 ```
 
+## Deploy to GitHub Pages
+
+This project is configured to deploy to GitHub Pages using GitHub Actions.
+
+1.  **Push the code** to your GitHub repository.
+2.  **Go to Settings > Pages** in your repository.
+3.  Under **Build and deployment**, select **GitHub Actions** as the source.
+4.  The pre-configured workflow (`.github/workflows/deploy.yml`) will automatically detect the push to `main` and deploy the site.
+
+**Note:** If you are deploying to a project repository (e.g., `https://username.github.io/repo-name`), you may need to update `next.config.ts` to include the `basePath`:
+
+```typescript
+const nextConfig: NextConfig = {
+  // ...
+  basePath: "/repo-name",
+};
+```
+
 ## Project Structure
 
 - `app/`: Main application code (Next.js App Router).
