@@ -5,18 +5,43 @@ import Image from "next/image";
 
 const Publications = () => {
   const [activeTab, setActiveTab] = useState("books");
+  const [bookCategory, setBookCategory] = useState("popular");
 
   const tabs = [
     { id: "books", label: "Books" },
-    { id: "scientific", label: "Scientific Articles" },
     { id: "popular", label: "Popular Articles" },
+    { id: "scientific", label: "Scientific Articles" },
   ];
 
   const books = [
-    { title: "Among Tigers", year: "2023", image: "https://placehold.co/200x300/2f855a/white?text=Among+Tigers" },
-    { title: "Growing up Karanth", year: "2021", image: "https://placehold.co/200x300/d69e2e/white?text=Growing+Up" },
-    { title: "Science of Saving Tigers", year: "2011", image: "https://placehold.co/200x300/4a5568/white?text=Science+Saving" },
-    { title: "The Way of the Tiger", year: "2001", image: "https://placehold.co/200x300/c53030/white?text=Way+of+Tiger" },
+    {
+      title: "Among Tigers",
+      year: "2023",
+      image: "https://placehold.co/200x300/2f855a/white?text=Among+Tigers",
+      category: "popular",
+      language: "English"
+    },
+    {
+      title: "Growing up Karanth",
+      year: "2021",
+      image: "https://placehold.co/200x300/d69e2e/white?text=Growing+Up",
+      category: "popular",
+      language: "Kannada"
+    },
+    {
+      title: "Science of Saving Tigers",
+      year: "2011",
+      image: "https://placehold.co/200x300/4a5568/white?text=Science+Saving",
+      category: "scientific",
+      language: "English"
+    },
+    {
+      title: "The Way of the Tiger",
+      year: "2001",
+      image: "https://placehold.co/200x300/c53030/white?text=Way+of+Tiger",
+      category: "scientific",
+      language: "Kannada"
+    },
   ];
 
   const scientificArticles = [
@@ -33,6 +58,8 @@ const Publications = () => {
     { title: "The Future of Indian Wildlife", publication: "The Hindu", year: "2017" },
     { title: "Conservation in the 21st Century", publication: "Sanctuary Asia", year: "2015" },
   ];
+
+  const filteredBooks = books.filter(book => book.category === bookCategory);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -58,21 +85,40 @@ const Publications = () => {
       {/* Content */}
       <div className="min-h-[400px]">
         {activeTab === "books" && (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {books.map((book, index) => (
-              <div key={index} className="flex flex-col items-center text-center group cursor-pointer">
-                <div className="relative h-64 w-44 mb-4 shadow-lg transition-transform duration-300 group-hover:scale-105">
-                  <Image
-                    src={book.image}
-                    alt={book.title}
-                    fill
-                    className="object-cover rounded-md"
-                  />
+          <div>
+            <div className="mb-6 flex justify-end">
+              <select
+                value={bookCategory}
+                onChange={(e) => setBookCategory(e.target.value)}
+                className="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-white text-gray-700"
+              >
+                <option value="popular">Popular Books</option>
+                <option value="scientific">Scientific Books</option>
+              </select>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {filteredBooks.map((book, index) => (
+                <div key={index} className="flex flex-col items-center text-center group cursor-pointer">
+                  <div className="relative h-64 w-44 mb-4 shadow-lg transition-transform duration-300 group-hover:scale-105">
+                    <Image
+                      src={book.image}
+                      alt={book.title}
+                      fill
+                      className="object-cover rounded-md"
+                    />
+                    <div className="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                      {book.language}
+                    </div>
+                  </div>
+                  <h3 className="font-bold text-lg text-gray-800 group-hover:text-primary transition-colors">{book.title}</h3>
+                  <span className="text-gray-500 text-sm">({book.year})</span>
                 </div>
-                <h3 className="font-bold text-lg text-gray-800 group-hover:text-primary transition-colors">{book.title}</h3>
-                <span className="text-gray-500 text-sm">({book.year})</span>
-              </div>
-            ))}
+              ))}
+            </div>
+             {filteredBooks.length === 0 && (
+                 <p className="text-center text-gray-500 py-10">No books found in this category.</p>
+            )}
           </div>
         )}
 
