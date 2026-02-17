@@ -12,3 +12,7 @@
   Suggestion: If you intended to restart next de○ Compiling / ...
  GET / 200 in 8.6s (compile: 7.1s, render: 1465ms)
  GET /media-gallery 200 in 564ms (compile: 311ms, render: 253ms)
+✓ Ready in 1703ms
+○ Compiling /publications ...
+ GET /publications 200 in 6.8s (compile: 6.1s, render: 696ms)
+ GET /media-gallery 200 in 909ms (compile: 761ms, render: 148ms)
