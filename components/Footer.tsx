@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* About Section */}
           <div>
-            <h3 className="text-xl font-bold mb-4">About WildLife Science</h3>
+            <h3 className="text-xl font-bold mb-4">About Ullas Karanth</h3>
             <p className="text-gray-300 text-sm leading-relaxed">
               Dr. K. Ullas Karanth is a renowned wildlife biologist dedicated to the conservation of tigers and other large carnivores. This website showcases his extensive research, publications, and commentary on wildlife science.
             </p>
@@ -33,7 +33,7 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-4">Get in Touch</h3>
             <p className="text-gray-300 text-sm mb-2">
-              Email: <a href="mailto:info@wildlifescience.com" className="hover:text-primary">info@wildlifescience.com</a>
+              Email: <a href="mailto:info@ullaskaranth.com" className="hover:text-primary">info@ullaskaranth.com</a>
             </p>
             <div className="flex space-x-4 mt-4">
               <a href="#" className="text-gray-400 hover:text-white transition-colors">
@@ -50,7 +50,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
-          <p>&copy; {currentYear} WildLife Science. All rights reserved.</p>
+          <p>&copy; {currentYear} Ullas Karanth. All rights reserved.</p>
         </div>
       </div>
     </footer>
