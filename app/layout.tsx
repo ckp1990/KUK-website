@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "WildLife Science",
+  title: "Ullas Karanth",
   description: "Portfolio of Dr. K. Ullas Karanth and wildlife science resources",
 };
 
