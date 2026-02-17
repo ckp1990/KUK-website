@@ -26,6 +26,15 @@ export default function MediaGallery() {
   ];
 
   const audioItems = [
+    { title: "The Roar of the Tiger", duration: "12:45", image: "https://placehold.co/800x600/2f855a/white?text=Podcast+Ep+1", url: "https://spotify.com" },
+    { title: "Conversation with Dr. Karanth", duration: "45:20", image: "https://placehold.co/800x600/d69e2e/white?text=Podcast+Ep+2", url: "https://spotify.com" },
+    { title: "Sounds of the Western Ghats", duration: "08:15", image: "https://placehold.co/800x600/4a5568/white?text=Nature+Sounds", url: "https://spotify.com" },
+  ];
+
+  const videoItems = [
+    { title: "Tracking Tigers", duration: "10:30", image: "https://placehold.co/800x600/c53030/white?text=Video+Tracking", url: "https://youtube.com" },
+    { title: "Keynote at Conservation Summit", duration: "35:00", image: "https://placehold.co/800x600/718096/white?text=Keynote+Speech", url: "https://youtube.com" },
+    { title: "Field Days: A Documentary", duration: "25:15", image: "https://placehold.co/800x600/ed8936/white?text=Documentary", url: "https://youtube.com" },
     { title: "The Roar of the Tiger", duration: "12:45", image: "https://placehold.co/800x600/2f855a/white?text=Podcast+Ep+1" },
     { title: "Conversation with Dr. Karanth", duration: "45:20", image: "https://placehold.co/800x600/d69e2e/white?text=Podcast+Ep+2" },
     { title: "Sounds of the Western Ghats", duration: "08:15", image: "https://placehold.co/800x600/4a5568/white?text=Nature+Sounds" },
@@ -85,6 +94,13 @@ export default function MediaGallery() {
         {activeTab === "audio" && (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {audioItems.map((item, index) => (
+              <a
+                key={index}
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block relative group overflow-hidden rounded-lg shadow-lg cursor-pointer bg-white"
+              >
               <div key={index} className="relative group overflow-hidden rounded-lg shadow-lg cursor-pointer bg-white">
                 <div className="relative h-64 w-full">
                   <Image
@@ -100,6 +116,10 @@ export default function MediaGallery() {
                   </div>
                 </div>
                 <div className="p-4">
+                  <h3 className="font-bold text-lg text-gray-800 mb-1 group-hover:text-primary transition-colors">{item.title}</h3>
+                  <p className="text-gray-500 text-sm flex items-center gap-1">Duration: {item.duration}</p>
+                </div>
+              </a>
                   <h3 className="font-bold text-lg text-gray-800 mb-1">{item.title}</h3>
                   <p className="text-gray-500 text-sm flex items-center gap-1">Duration: {item.duration}</p>
                 </div>
@@ -111,6 +131,13 @@ export default function MediaGallery() {
         {activeTab === "video" && (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {videoItems.map((item, index) => (
+              <a
+                key={index}
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block relative group overflow-hidden rounded-lg shadow-lg cursor-pointer bg-white"
+              >
               <div key={index} className="relative group overflow-hidden rounded-lg shadow-lg cursor-pointer bg-white">
                 <div className="relative h-64 w-full">
                   <Image
@@ -126,6 +153,10 @@ export default function MediaGallery() {
                   </div>
                 </div>
                 <div className="p-4">
+                  <h3 className="font-bold text-lg text-gray-800 mb-1 group-hover:text-primary transition-colors">{item.title}</h3>
+                  <p className="text-gray-500 text-sm flex items-center gap-1">Duration: {item.duration}</p>
+                </div>
+              </a>
                   <h3 className="font-bold text-lg text-gray-800 mb-1">{item.title}</h3>
                   <p className="text-gray-500 text-sm flex items-center gap-1">Duration: {item.duration}</p>
                 </div>
