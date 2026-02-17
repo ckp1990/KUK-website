@@ -35,6 +35,15 @@ export default function MediaGallery() {
     { title: "Tracking Tigers", duration: "10:30", image: "https://placehold.co/800x600/c53030/white?text=Video+Tracking", url: "https://youtube.com" },
     { title: "Keynote at Conservation Summit", duration: "35:00", image: "https://placehold.co/800x600/718096/white?text=Keynote+Speech", url: "https://youtube.com" },
     { title: "Field Days: A Documentary", duration: "25:15", image: "https://placehold.co/800x600/ed8936/white?text=Documentary", url: "https://youtube.com" },
+    { title: "The Roar of the Tiger", duration: "12:45", image: "https://placehold.co/800x600/2f855a/white?text=Podcast+Ep+1" },
+    { title: "Conversation with Dr. Karanth", duration: "45:20", image: "https://placehold.co/800x600/d69e2e/white?text=Podcast+Ep+2" },
+    { title: "Sounds of the Western Ghats", duration: "08:15", image: "https://placehold.co/800x600/4a5568/white?text=Nature+Sounds" },
+  ];
+
+  const videoItems = [
+    { title: "Tracking Tigers", duration: "10:30", image: "https://placehold.co/800x600/c53030/white?text=Video+Tracking" },
+    { title: "Keynote at Conservation Summit", duration: "35:00", image: "https://placehold.co/800x600/718096/white?text=Keynote+Speech" },
+    { title: "Field Days: A Documentary", duration: "25:15", image: "https://placehold.co/800x600/ed8936/white?text=Documentary" },
   ];
 
   return (
@@ -92,6 +101,7 @@ export default function MediaGallery() {
                 rel="noopener noreferrer"
                 className="block relative group overflow-hidden rounded-lg shadow-lg cursor-pointer bg-white"
               >
+              <div key={index} className="relative group overflow-hidden rounded-lg shadow-lg cursor-pointer bg-white">
                 <div className="relative h-64 w-full">
                   <Image
                     src={item.image}
@@ -110,6 +120,10 @@ export default function MediaGallery() {
                   <p className="text-gray-500 text-sm flex items-center gap-1">Duration: {item.duration}</p>
                 </div>
               </a>
+                  <h3 className="font-bold text-lg text-gray-800 mb-1">{item.title}</h3>
+                  <p className="text-gray-500 text-sm flex items-center gap-1">Duration: {item.duration}</p>
+                </div>
+              </div>
             ))}
           </div>
         )}
@@ -124,6 +138,7 @@ export default function MediaGallery() {
                 rel="noopener noreferrer"
                 className="block relative group overflow-hidden rounded-lg shadow-lg cursor-pointer bg-white"
               >
+              <div key={index} className="relative group overflow-hidden rounded-lg shadow-lg cursor-pointer bg-white">
                 <div className="relative h-64 w-full">
                   <Image
                     src={item.image}
@@ -142,6 +157,10 @@ export default function MediaGallery() {
                   <p className="text-gray-500 text-sm flex items-center gap-1">Duration: {item.duration}</p>
                 </div>
               </a>
+                  <h3 className="font-bold text-lg text-gray-800 mb-1">{item.title}</h3>
+                  <p className="text-gray-500 text-sm flex items-center gap-1">Duration: {item.duration}</p>
+                </div>
+              </div>
             ))}
           </div>
         )}
