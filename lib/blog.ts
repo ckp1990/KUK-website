@@ -2,7 +2,9 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { remark } from "remark";
-import html from "remark-html";
+import remarkRehype from "remark-rehype";
+import rehypeSanitize from "rehype-sanitize";
+import rehypeStringify from "rehype-stringify";
 
 const postsDirectory = path.join(process.cwd(), "content/blog");
 
@@ -67,6 +69,10 @@ export function getAllPosts(fields: string[] = []) {
 }
 
 export async function markdownToHtml(markdown: string) {
-  const result = await remark().use(html).process(markdown);
+  const result = await remark()
+    .use(remarkRehype)
+    .use(rehypeSanitize)
+    .use(rehypeStringify)
+    .process(markdown);
   return result.toString();
 }
