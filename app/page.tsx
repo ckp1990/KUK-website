@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import TestimonialCarousel from "@/components/TestimonialCarousel";
 
 export default function Home() {
   const species = [
@@ -29,6 +30,24 @@ export default function Home() {
       role: "Professor, Columbia University",
       quote: "Among Tigers is a unique book by a unique author. Ullas Karanth has devoted his life to the understanding and protection of the endangered tigers of Asia.",
       image: "https://placehold.co/86x86/4a5568/white?text=JS",
+    },
+    {
+      name: "Dr. Jane Goodall",
+      role: "Founder, Jane Goodall Institute",
+      quote: "An inspiring figure in conservation. Dr. Karanth's dedication to the tiger is a beacon of hope for wildlife preservation globally.",
+      image: "https://placehold.co/86x86/2b6cb0/white?text=JG",
+    },
+    {
+      name: "Sir David Attenborough",
+      role: "Broadcaster and Naturalist",
+      quote: "The meticulous work of Ullas Karanth has shed new light on the hidden lives of tigers, crucial for their survival in the modern world.",
+      image: "https://placehold.co/86x86/2c5282/white?text=DA",
+    },
+    {
+      name: "Dr. Raghu Chundawat",
+      role: "Conservation Biologist",
+      quote: "A pioneer in rigorous scientific methodology for tiger census, his contributions have set the standard for wildlife research in India.",
+      image: "https://placehold.co/86x86/2d3748/white?text=RC",
     },
   ];
 
@@ -120,23 +139,7 @@ export default function Home() {
       {/* Testimonials */}
       <section className="container mx-auto px-4">
         <h2 className="text-3xl font-bold mb-10 text-center text-primary">Testimonials</h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          {testimonials.map((t, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center">
-              <div className="w-20 h-20 mx-auto mb-4 rounded-full overflow-hidden relative">
-                <Image
-                    src={t.image}
-                    alt={t.name}
-                    fill
-                    className="object-cover"
-                />
-              </div>
-              <h3 className="font-bold text-lg mb-1">{t.name}</h3>
-              <p className="text-sm text-gray-500 mb-4">{t.role}</p>
-              <p className="text-gray-700 italic">&quot;{t.quote}&quot;</p>
-            </div>
-          ))}
-        </div>
+        <TestimonialCarousel testimonials={testimonials} />
       </section>
 
       {/* Associated Institutions */}
