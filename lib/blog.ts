@@ -7,36 +7,54 @@ import html from "remark-html";
 const postsDirectory = path.join(process.cwd(), "content/blog");
 
 export function getPostSlugs() {
-  return fs.readdirSync(postsDirectory);
+  try {
+    if (!fs.existsSync(postsDirectory)) {
+      return [];
+    }
+    return fs.readdirSync(postsDirectory);
+  } catch (error) {
+    console.error("Error reading post slugs:", error);
+    return [];
+  }
 }
 
 export function getPostBySlug(slug: string, fields: string[] = []) {
   const realSlug = slug.replace(/\.md$/, "");
   const fullPath = path.join(postsDirectory, `${realSlug}.md`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
-  const { data, content } = matter(fileContents);
 
-  type Items = {
-    [key: string]: string;
-  };
-
-  const items: Items = {};
-
-  // Ensure only the minimal needed data is exposed
-  fields.forEach((field) => {
-    if (field === "slug") {
-      items[field] = realSlug;
-    }
-    if (field === "content") {
-      items[field] = content;
+  try {
+    if (!fs.existsSync(fullPath)) {
+      return {};
     }
 
-    if (typeof data[field] !== "undefined") {
-      items[field] = data[field];
-    }
-  });
+    const fileContents = fs.readFileSync(fullPath, "utf8");
+    const { data, content } = matter(fileContents);
 
-  return items;
+    type Items = {
+      [key: string]: string;
+    };
+
+    const items: Items = {};
+
+    // Ensure only the minimal needed data is exposed
+    fields.forEach((field) => {
+      if (field === "slug") {
+        items[field] = realSlug;
+      }
+      if (field === "content") {
+        items[field] = content;
+      }
+
+      if (typeof data[field] !== "undefined") {
+        items[field] = data[field];
+      }
+    });
+
+    return items;
+  } catch (error) {
+    console.error(`Error reading post by slug (${slug}):`, error);
+    return {};
+  }
 }
 
 export function getAllPosts(fields: string[] = []) {
