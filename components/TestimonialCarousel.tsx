@@ -35,6 +35,7 @@ export default function TestimonialCarousel({ testimonials }: TestimonialCarouse
                 src={t.image}
                 alt={t.name}
                 fill
+                sizes="80px"
                 className="object-cover"
               />
             </div>
@@ -99,6 +100,7 @@ export default function TestimonialCarousel({ testimonials }: TestimonialCarouse
                 src={t.image}
                 alt={t.name}
                 fill
+                sizes="80px"
                 className="object-cover"
               />
             </div>
