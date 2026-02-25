@@ -26,6 +26,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta
+          httpEquiv="Content-Security-Policy"
+          content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data: https://placehold.co https://firebasestorage.googleapis.com; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'self' https://www.youtube.com https://open.spotify.com; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com; upgrade-insecure-requests;"
+        />
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
