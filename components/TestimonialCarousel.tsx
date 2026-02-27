@@ -3,13 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-
-interface Testimonial {
-  name: string;
-  role: string;
-  quote: string;
-  image: string;
-}
+import { Testimonial } from '@/lib/data/home';
 
 interface TestimonialCarouselProps {
   testimonials: Testimonial[];
