@@ -70,4 +70,30 @@ test('getPostSlugs', async (t) => {
     existsSyncMock.mock.restore();
     readdirSyncMock.mock.restore();
   });
+
+  await t.test('returns empty array and logs error if fs.readdirSync throws', () => {
+    const existsSyncMock = mock.method(fs, 'existsSync', () => true);
+    const readdirSyncMock = mock.method(fs, 'readdirSync', () => {
+        throw new Error('Permission denied');
+    });
+
+    // Mock console.error to suppress output and verify it was called
+    const consoleErrorMock = mock.method(console, 'error', () => {});
+
+    const result = getPostSlugs();
+    assert.deepStrictEqual(result, []);
+
+    assert.strictEqual(consoleErrorMock.mock.calls.length, 1);
+    const [ call ] = consoleErrorMock.mock.calls;
+    assert.strictEqual(call.arguments[0], 'Error reading post slugs:');
+
+    // Check error message using a safer approach than direct object comparison
+    // because Error objects can be tricky to compare directly in some environments
+    const errorArg = call.arguments[1] as Error;
+    assert.strictEqual(errorArg.message, 'Permission denied');
+
+    existsSyncMock.mock.restore();
+    readdirSyncMock.mock.restore();
+    consoleErrorMock.mock.restore();
+  });
 });
