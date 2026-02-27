@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Facebook, Twitter, Instagram } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -35,22 +34,14 @@ const Footer = () => {
             <p className="text-gray-300 text-sm mb-2">
               Email: <a href="mailto:info@ullaskaranth.com" className="hover:text-primary">info@ullaskaranth.com</a>
             </p>
-            <div className="flex space-x-4 mt-4">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Facebook size={24} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Twitter size={24} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Instagram size={24} />
-              </a>
-            </div>
           </div>
         </div>
 
-        <div className="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
-          <p>&copy; {currentYear} Ullas Karanth. All rights reserved.</p>
+        <div className="border-t border-gray-700 mt-8 pt-8 text-sm text-gray-400 relative flex flex-col items-center md:block">
+          <div className="md:absolute md:left-0 md:top-8 mb-2 md:mb-0">
+             Design by <a href="https://github.com/ckp1990" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">@chandanpandey</a>
+          </div>
+          <p className="text-center">&copy; {currentYear} Ullas Karanth. All rights reserved.</p>
         </div>
       </div>
     </footer>
