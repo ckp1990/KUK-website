@@ -1,9 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
-import { species, testimonials, institutions } from "@/lib/data/home";
-
-export default function Home() {
   return (
     <div className="space-y-16">
       {/* Hero Section */}
@@ -62,7 +59,7 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {species.map((s) => (
               <div key={s.name} className="relative group overflow-hidden rounded-lg shadow-md cursor-pointer">
-                <div className="relative h-64 w-full">
+                <div className="relative h-[300px] w-full">
                     <Image
                         src={s.image}
                         alt={s.name}
