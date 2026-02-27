@@ -1,17 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
+import { species } from "@/lib/data/species";
 
 export default function Home() {
-  const species = [
-    { name: "Tiger", image: "https://placehold.co/300x260/2f855a/white?text=Tiger" },
-    { name: "Leopard", image: "https://placehold.co/300x260/d69e2e/white?text=Leopard" },
-    { name: "Elephant", image: "https://placehold.co/300x260/4a5568/white?text=Elephant" },
-    { name: "Dhole", image: "https://placehold.co/300x260/c53030/white?text=Dhole" },
-    { name: "Gaur", image: "https://placehold.co/300x260/718096/white?text=Gaur" },
-    { name: "Sambar", image: "https://placehold.co/300x260/ed8936/white?text=Sambar" },
-  ];
-
   const testimonials = [
     {
       name: "Dr. George B. Schaller",
@@ -118,7 +110,7 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {species.map((s) => (
               <div key={s.name} className="relative group overflow-hidden rounded-lg shadow-md cursor-pointer">
-                <div className="relative h-64 w-full">
+                <div className="relative h-[300px] w-full">
                     <Image
                         src={s.image}
                         alt={s.name}
