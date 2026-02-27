@@ -19,7 +19,7 @@ export default function About() {
             In recognition of my contributions to wildlife conservation, I won the Sierra Club’s EarthCare award (2006), World Wildlife Funds’s J. Paul Getty award (2007) and the Wildlife Conservation Society’s George Schaller Award (2018). I am a Fellow of the Indian Academy of Sciences (2008), and have been conferred the Karnataka Rajya Prashashti (2011), the Presidential award Padma Shri (2012). I have been recognized as a Distinguished Alumnus by the St. Aloysius College, Mangalore, the National Institute of Technology, Surathkal and the University of Florida, Gainesville, USA (2022).
           </p>
           <p>
-            I serve on the World Conservation Union's specialist groups on Cats, Bears, Elephants, Wild Cattle and Small Carnivores, and have in the past served on Indian Government’s Forest Advisory Committee, National Tiger Conservation Authority and Governing Council of the Wildlife Institute of India. I have been active in conservation serving on the boards of WWF-India and the Liz Claiborne Foundation, New York.
+            I serve on the World Conservation Union&apos;s specialist groups on Cats, Bears, Elephants, Wild Cattle and Small Carnivores, and have in the past served on Indian Government’s Forest Advisory Committee, National Tiger Conservation Authority and Governing Council of the Wildlife Institute of India. I have been active in conservation serving on the boards of WWF-India and the Liz Claiborne Foundation, New York.
           </p>
           <p>
             My work has been featured in world’s media including Nature, Science, New Scientist, Scientific American, New York Times, Time Magazine, National Geographic, BBC, CNN, PBS, CBC, Discovery and Animal Planet.
