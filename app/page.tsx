@@ -1,6 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
+import { species } from "@/lib/data/species";
+import { testimonials, institutions } from "@/lib/data/home";
+
+export default function Home() {
   return (
     <div className="space-y-16">
       {/* Hero Section */}
