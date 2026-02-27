@@ -88,10 +88,10 @@ export default function Home() {
         <div>
           <h2 className="text-3xl font-bold mb-6 text-primary">About Dr. K. Ullas Karanth</h2>
           <p className="text-gray-700 leading-relaxed mb-6">
-            Born in 1948, I am the son of noted writer Kota Shivarama Karanth. Trained first as a mechanical engineer, I shifted to wildlife biology, earning an M.S. from the University of Florida and a Ph.D. from Mangalore University. I founded the Centre for Wildlife Studies and directed the Wildlife Conservation Society–India Program for decades.
+            I originally trained as a mechanical engineer at the National Institute of Technology, Surathkal (1971), but changed careers to pursue my deep passion for wildlife biology, obtaining an MS degree from the University of Florida, USA (1988) and a PhD from Mangalore University, India (1993).
           </p>
           <p className="text-gray-700 leading-relaxed mb-6">
-            For over five decades, I have studied the ecology of tigers, predators, and prey in India and Thailand, specializing in large carnivore ecology, animal population analysis, conservation biology, and policy.
+            I am now Emeritus Director of the Centre for Wildlife Studies (CWS) that I founded in 1984. During 1988-2017, I also headed the Wildlife Conservation Society (WCS) India Program. I have held the positions of an Adjunct Professor at the universities of Florida and Minnesota in the USA and the Tata Institute of Fundamental Research-NCBS, India.
           </p>
           <Link
             href="/about"
@@ -102,9 +102,10 @@ export default function Home() {
         </div>
         <div className="relative h-[400px] w-full bg-gray-200 rounded-lg overflow-hidden">
              <Image
-                src="https://placehold.co/600x800/2f855a/white?text=Dr.+Karanth"
+                src="/ullas-karanth-sandesh-kadur.jpg"
                 alt="Dr. K. Ullas Karanth"
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
              />
         </div>
