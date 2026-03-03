@@ -7,9 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --experimental-strip-types --no-warnings --test"
+    "test": "node --experimental-strip-types --test tests/**/*.test.ts",
+    "upload:images": "node scripts/upload-to-cloudinary.js",
+    "update:data": "node scripts/update-data-with-cloudinary.js"
   },
   "dependencies": {
+    "cloudinary": "^2.9.0",
+    "dotenv": "^17.3.1",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.564.0",
     "next": "16.1.6",
