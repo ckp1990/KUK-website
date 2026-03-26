@@ -4,7 +4,6 @@ import TestimonialCarousel from "@/components/TestimonialCarousel";
 import { species } from "@/lib/data/species";
 import { testimonials, institutions } from "@/lib/data/home";
 import bannerImage from "../public/KUK_Banner.jpg";
-import aboutImage from "../public/ullas-karanth-sandesh-kadur.jpg";
 
 export default function Home() {
   return (
