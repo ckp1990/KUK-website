@@ -3,7 +3,7 @@ import Image from "next/image";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import { species } from "@/lib/data/species";
 import { testimonials, institutions } from "@/lib/data/home";
-import bannerImage from "../public/KUK_Banner.JPG";
+import bannerImage from "../public/KUK_Banner.jpg";
 
 export default function Home() {
   return (
