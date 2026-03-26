@@ -1,4 +1,4 @@
-import { test, mock } from 'node:test';
+import { test, mock, beforeEach } from 'node:test';
 import assert from 'node:assert';
 import fs from 'node:fs';
 import { getPostBySlug, getPostSlugs, markdownToHtml } from './blog.ts';
@@ -19,6 +19,10 @@ test('markdownToHtml', async (t) => {
 });
 
 test('getPostBySlug', async (t) => {
+  beforeEach(() => {
+    clearPostCache();
+  });
+
   await t.test('returns empty object if file does not exist', () => {
     // Mock fs.existsSync to return false
     const existsSyncMock = mock.method(fs, 'existsSync', () => false);
