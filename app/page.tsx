@@ -1,12 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
-import { species } from "@/lib/data/species";
+import { getSpecies } from "@/lib/data/species";
 import { testimonials, institutions } from "@/lib/data/home";
 import bannerImage from "../public/KUK_Banner.jpg";
 import aboutImage from "../public/ullas-karanth-sandesh-kadur.jpg";
 
-export default function Home() {
+export default async function Home() {
+  const speciesList = await getSpecies();
+
   return (
     <div className="space-y-16">
       {/* Hero Section */}
@@ -53,13 +55,14 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-10 text-center text-primary">Species of Interest</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {species.map((s) => (
+            {speciesList.map((s) => (
               <div key={s.name} className="relative group overflow-hidden rounded-lg shadow-md cursor-pointer">
                 <div className="relative h-[300px] w-full">
                     <Image
                         src={s.image}
                         alt={s.name}
                         fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
                         className="object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                 </div>
