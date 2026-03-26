@@ -38,7 +38,7 @@ export default function Home() {
         </div>
         <div className="relative h-[400px] w-full bg-gray-200 rounded-lg overflow-hidden">
              <Image
-                src="/ullas-karanth-sandesh-kadur.jpg"
+                src={aboutImage}
                 alt="Dr. K. Ullas Karanth"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
