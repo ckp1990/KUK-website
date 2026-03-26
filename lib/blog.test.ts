@@ -1,7 +1,22 @@
 import { test, mock, beforeEach } from 'node:test';
 import assert from 'node:assert';
 import fs from 'node:fs';
-import { getPostBySlug, getPostSlugs, clearPostCache } from './blog.ts';
+import { getPostBySlug, getPostSlugs, markdownToHtml } from './blog.ts';
+
+test('markdownToHtml', async (t) => {
+  await t.test('converts markdown to html', async () => {
+    const markdown = '# Hello World';
+    const result = await markdownToHtml(markdown);
+    // In a real environment, this uses remark-rehype, rehype-sanitize, and rehype-stringify.
+    // Our test expects standard HTML output for headers.
+    assert.strictEqual(result, '<h1>Hello World</h1>');
+  });
+
+  await t.test('handles empty string', async () => {
+    const result = await markdownToHtml('');
+    assert.strictEqual(result, '');
+  });
+});
 
 test('getPostBySlug', async (t) => {
   beforeEach(() => {
