@@ -28,12 +28,11 @@ export const getSpecies = async (): Promise<Species[]> => {
     }
 
     // Fetch images from the 'species_of_interest' folder
-    // Using search API as Cloudinary's dynamic folders are not always public_id prefixes
-    const result = await cloudinary.search
-      .expression('folder="species_of_interest"')
-      .sort_by("public_id", "desc")
-      .max_results(50)
-      .execute();
+    const result = await cloudinary.api.resources({
+      type: "upload",
+      prefix: "species_of_interest/", // The folder name you created
+      max_results: 50,
+    });
 
     if (!result.resources || result.resources.length === 0) {
       console.warn("No images found in Cloudinary folder 'species_of_interest'.");
@@ -41,14 +40,13 @@ export const getSpecies = async (): Promise<Species[]> => {
     }
 
     const speciesList: Species[] = result.resources.map((resource: any) => {
-      // Use display_name (e.g. "Tiger.png" or "Tiger") or fallback to public_id
-      const rawName = resource.display_name
-        ? resource.display_name.replace(/\.[^/.]+$/, "") // Remove file extension like .png or .jpg
-        : resource.public_id.split("/").pop(); // Get last part of public_id
+      // Get the filename without the folder path
+      // e.g., "species_of_interest/Tiger" -> "Tiger"
+      const publicIdParts = resource.public_id.split("/");
+      const rawName = publicIdParts[publicIdParts.length - 1];
 
       // Format the name: "snow_leopard" -> "Snow Leopard", "Tiger" -> "Tiger"
       const formattedName = rawName
-        .replace(/^[0-9]+[-_]?/, "") // Remove leading numbers and dashes (e.g., "1-_Tiger" -> "Tiger")
         .split(/[_-]/) // split by underscore or dash
         .map(
           (word: string) =>
