@@ -8,6 +8,16 @@ import rehypeStringify from "rehype-stringify";
 
 const postsDirectory = path.join(process.cwd(), "content/blog");
 
+// Module-level cache for parsed posts
+let postCache: Record<string, { data: { [key: string]: any }; content: string }> = {};
+
+/**
+ * Clears the post cache. Primarily used for testing.
+ */
+export function clearPostCache() {
+  postCache = {};
+}
+
 export function getPostSlugs() {
   try {
     if (!fs.existsSync(postsDirectory)) {
@@ -25,12 +35,20 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
   const fullPath = path.join(postsDirectory, `${realSlug}.md`);
 
   try {
-    if (!fs.existsSync(fullPath)) {
-      return {};
+    let post = postCache[realSlug];
+
+    if (!post) {
+      if (!fs.existsSync(fullPath)) {
+        return {};
+      }
+
+      const fileContents = fs.readFileSync(fullPath, "utf8");
+      const { data, content } = matter(fileContents);
+      post = { data, content };
+      postCache[realSlug] = post;
     }
 
-    const fileContents = fs.readFileSync(fullPath, "utf8");
-    const { data, content } = matter(fileContents);
+    const { data, content } = post;
 
     type Items = {
       [key: string]: string;
