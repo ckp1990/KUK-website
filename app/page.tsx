@@ -3,29 +3,21 @@ import Image from "next/image";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import { species } from "@/lib/data/species";
 import { testimonials, institutions } from "@/lib/data/home";
+import bannerImage from "../public/KUK_Banner.jpg";
+import aboutImage from "../public/ullas-karanth-sandesh-kadur.jpg";
 
 export default function Home() {
   return (
     <div className="space-y-16">
       {/* Hero Section */}
-      <section className="relative h-[600px] flex items-center justify-center text-center text-white">
-        <div className="absolute inset-0 bg-black opacity-50 z-10"></div>
-        <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: "url('https://placehold.co/1920x1080/2f855a/white?text=WildLife+Science+Hero')" }}
-        ></div>
-        <div className="relative z-20 max-w-4xl px-4">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">WildLife Science</h1>
-          <p className="text-xl md:text-2xl mb-8">
-            Exploring the ecology of tigers, predators, and prey in India and Thailand.
-          </p>
-          <Link
-            href="/about"
-            className="bg-secondary text-white px-8 py-3 rounded-md font-semibold hover:bg-yellow-600 transition-colors"
-          >
-            Learn More About Me
-          </Link>
-        </div>
+      <section className="relative w-full">
+        <Image
+          src={bannerImage}
+          alt="Dr. K. Ullas Karanth Banner"
+          className="w-full h-auto object-cover"
+          priority
+          placeholder="blur"
+        />
       </section>
 
       {/* About Snippet */}
@@ -47,7 +39,7 @@ export default function Home() {
         </div>
         <div className="relative h-[400px] w-full bg-gray-200 rounded-lg overflow-hidden">
              <Image
-                src="/ullas-karanth-sandesh-kadur.jpg"
+                src={aboutImage}
                 alt="Dr. K. Ullas Karanth"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
