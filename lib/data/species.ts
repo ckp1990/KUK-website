@@ -48,7 +48,7 @@ export const getSpecies = async (): Promise<Species[]> => {
 
       // Format the name: "snow_leopard" -> "Snow Leopard", "Tiger" -> "Tiger"
       const formattedName = rawName
-        .replace(/^[0-9_-]+/, "") // Remove leading numbers and dashes/underscores (e.g., "1_-_Tiger" -> "Tiger")
+        .replace(/^[0-9]+[-_]?/, "") // Remove leading numbers and dashes (e.g., "1-_Tiger" -> "Tiger")
         .split(/[_-]/) // split by underscore or dash
         .map(
           (word: string) =>
