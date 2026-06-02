@@ -29,14 +29,28 @@ export const getSpecies = async (): Promise<Species[]> => {
 
     // Fetch images from the 'species_of_interest' folder
     // Using search API as Cloudinary's dynamic folders are not always public_id prefixes
-    const result = await cloudinary.search
+
+    // Create a timeout promise that rejects after 10 seconds
+    let timeoutId: NodeJS.Timeout;
+    const timeoutPromise = new Promise<never>((_, reject) => {
+      timeoutId = setTimeout(() => {
+        reject(new Error("Cloudinary search request timed out after 10 seconds"));
+      }, 10000);
+    });
+
+    // Execute the search, racing it against the timeout to prevent Next.js build hanging
+    const searchPromise = cloudinary.search
       .expression('folder="species_of_interest"')
       .sort_by("public_id", "desc")
       .max_results(50)
       .execute();
 
-    if (!result.resources || result.resources.length === 0) {
-      console.warn("No images found in Cloudinary folder 'species_of_interest'.");
+    const result = await Promise.race([searchPromise, timeoutPromise]).finally(() => {
+        clearTimeout(timeoutId);
+    }) as any;
+
+    if (!result || !result.resources || result.resources.length === 0) {
+      console.warn("No images found in Cloudinary folder 'species_of_interest' or request failed.");
       return getDefaultSpecies();
     }
 

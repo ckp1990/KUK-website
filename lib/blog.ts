@@ -9,13 +9,15 @@ import rehypeStringify from "rehype-stringify";
 const postsDirectory = path.join(process.cwd(), "content/blog");
 
 // Module-level cache for parsed posts
-let postCache: Record<string, { data: { [key: string]: any }; content: string }> = {};
+const postCache: Record<string, { data: { [key: string]: any }; content: string }> = {};
 
 /**
  * Clears the post cache. Primarily used for testing.
  */
 export function clearPostCache() {
-  postCache = {};
+  for (const key in postCache) {
+    delete postCache[key];
+  }
 }
 
 export function getPostSlugs() {
