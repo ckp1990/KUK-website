@@ -64,41 +64,46 @@ async function uploadImage(filePath) {
 }
 
 async function main() {
-  if (!fs.existsSync(IMAGES_DIR)) {
-    console.error(`❌ The directory ${IMAGES_DIR} does not exist. Please create it and add your images. See CLOUDINARY_SETUP.md`);
+  try {
+    if (!fs.existsSync(IMAGES_DIR)) {
+      console.error(`❌ The directory ${IMAGES_DIR} does not exist. Please create it and add your images. See CLOUDINARY_SETUP.md`);
+      process.exit(1);
+    }
+
+    const allFiles = getAllFiles(IMAGES_DIR);
+    // Filter for common image types
+    const imageFiles = allFiles.filter(file => {
+      const ext = path.extname(file).toLowerCase();
+      return ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg'].includes(ext);
+    });
+
+    if (imageFiles.length === 0) {
+      console.log(`⚠️ No images found in ${IMAGES_DIR}.`);
+      return;
+    }
+
+    console.log(`Found ${imageFiles.length} images to upload.\n`);
+
+    const mapping = {};
+
+    // Upload sequentially to avoid rate limiting
+    for (const file of imageFiles) {
+      const secureUrl = await uploadImage(file);
+      if (secureUrl) {
+        // Store the relative path (e.g., "species/tiger.jpg") as the key
+        const relativePath = path.relative(IMAGES_DIR, file).replace(/\\/g, '/');
+        mapping[relativePath] = secureUrl;
+      }
+    }
+
+    // Save the mapping
+    fs.writeFileSync(MAPPING_FILE, JSON.stringify(mapping, null, 2));
+    console.log(`\n🎉 All uploads complete! Mapping saved to ${MAPPING_FILE}`);
+    console.log(`You can now run 'npm run update:data' to replace placeholders.`);
+  } catch (error) {
+    console.error("❌ An unexpected error occurred in main():", error);
     process.exit(1);
   }
-
-  const allFiles = getAllFiles(IMAGES_DIR);
-  // Filter for common image types
-  const imageFiles = allFiles.filter(file => {
-    const ext = path.extname(file).toLowerCase();
-    return ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg'].includes(ext);
-  });
-
-  if (imageFiles.length === 0) {
-    console.log(`⚠️ No images found in ${IMAGES_DIR}.`);
-    return;
-  }
-
-  console.log(`Found ${imageFiles.length} images to upload.\n`);
-
-  const mapping = {};
-
-  // Upload sequentially to avoid rate limiting
-  for (const file of imageFiles) {
-    const secureUrl = await uploadImage(file);
-    if (secureUrl) {
-      // Store the relative path (e.g., "species/tiger.jpg") as the key
-      const relativePath = path.relative(IMAGES_DIR, file).replace(/\\/g, '/');
-      mapping[relativePath] = secureUrl;
-    }
-  }
-
-  // Save the mapping
-  fs.writeFileSync(MAPPING_FILE, JSON.stringify(mapping, null, 2));
-  console.log(`\n🎉 All uploads complete! Mapping saved to ${MAPPING_FILE}`);
-  console.log(`You can now run 'npm run update:data' to replace placeholders.`);
 }
 
 main();

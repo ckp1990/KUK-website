@@ -22,8 +22,8 @@ export default function TestimonialCarousel({ testimonials }: TestimonialCarouse
   if (!testimonials || testimonials.length <= 3) {
     return (
       <div className="grid md:grid-cols-3 gap-8">
-        {testimonials?.map((t, index) => (
-          <div key={index} className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center">
+        {testimonials?.map((t) => (
+          <div key={t.name} className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center">
             <div className="w-20 h-20 mx-auto mb-4 rounded-full overflow-hidden relative">
               <Image
                 src={t.image}

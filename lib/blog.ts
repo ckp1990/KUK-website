@@ -40,10 +40,19 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
       return {};
     }
 
-    const { data, content } = post;
+    let data, content;
+    if (postCache[realSlug]) {
+      ({ data, content } = postCache[realSlug]);
+    } else {
+      const fileContents = fs.readFileSync(fullPath, "utf8");
+      const parsed = matter(fileContents);
+      data = parsed.data;
+      content = parsed.content;
+      postCache[realSlug] = { data, content };
+    }
 
     type Items = {
-      [key: string]: string;
+      [key: string]: any;
     };
 
     const items: Items = {};
