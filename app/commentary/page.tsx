@@ -9,7 +9,7 @@ export default function Commentary() {
       <h1 className="text-4xl font-bold mb-8 text-primary border-b pb-4">Commentary</h1>
 
       <div className="space-y-8">
-        {allPosts.map((post) => (
+        {allPosts?.map((post) => (
           <article key={post.slug} className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
             <h2 className="text-2xl font-bold mb-2">
               <Link href={`/commentary/${post.slug}`} className="hover:text-primary transition-colors">

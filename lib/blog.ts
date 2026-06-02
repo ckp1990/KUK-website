@@ -9,13 +9,15 @@ import rehypeStringify from "rehype-stringify";
 const postsDirectory = path.join(process.cwd(), "content/blog");
 
 // Module-level cache for parsed posts
-let postCache: Record<string, { data: { [key: string]: any }; content: string }> = {};
+const postCache: Record<string, { data: { [key: string]: any }; content: string }> = {};
 
 /**
  * Clears the post cache. Primarily used for testing.
  */
 export function clearPostCache() {
-  postCache = {};
+  for (const key in postCache) {
+    delete postCache[key];
+  }
 }
 
 export function getPostSlugs() {
@@ -40,10 +42,19 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
       return {};
     }
 
-    const { data, content } = post;
+    let data, content;
+    if (postCache[realSlug]) {
+      ({ data, content } = postCache[realSlug]);
+    } else {
+      const fileContents = fs.readFileSync(fullPath, "utf8");
+      const parsed = matter(fileContents);
+      data = parsed.data;
+      content = parsed.content;
+      postCache[realSlug] = { data, content };
+    }
 
     type Items = {
-      [key: string]: string;
+      [key: string]: any;
     };
 
     const items: Items = {};
@@ -73,6 +84,7 @@ export function getAllPosts(fields: string[] = []) {
   const slugs = getPostSlugs();
   const posts = slugs
     .map((slug) => getPostBySlug(slug, [...fields, "date"]))
+    .filter(post => post && post.date) // ensure post and date exist before sorting
     // sort posts by date in descending order
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
   return posts;
