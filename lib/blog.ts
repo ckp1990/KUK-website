@@ -32,20 +32,12 @@ export function getPostSlugs() {
 
 export function getPostBySlug(slug: string, fields: string[] = []) {
   const realSlug = slug.replace(/\.md$/, "");
-  const fullPath = path.join(postsDirectory, `${realSlug}.md`);
+  const fullPath = path.resolve(postsDirectory, `${realSlug}.md`);
 
   try {
-    let post = postCache[realSlug];
-
-    if (!post) {
-      if (!fs.existsSync(fullPath)) {
-        return {};
-      }
-
-      const fileContents = fs.readFileSync(fullPath, "utf8");
-      const { data, content } = matter(fileContents);
-      post = { data, content };
-      postCache[realSlug] = post;
+    // Security check: ensure the resolved path is within the postsDirectory
+    if (!fullPath.startsWith(path.resolve(postsDirectory)) || !fs.existsSync(fullPath)) {
+      return {};
     }
 
     const { data, content } = post;
