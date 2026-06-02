@@ -22,10 +22,11 @@ export function getPostSlugs() {
 
 export function getPostBySlug(slug: string, fields: string[] = []) {
   const realSlug = slug.replace(/\.md$/, "");
-  const fullPath = path.join(postsDirectory, `${realSlug}.md`);
+  const fullPath = path.resolve(postsDirectory, `${realSlug}.md`);
 
   try {
-    if (!fs.existsSync(fullPath)) {
+    // Security check: ensure the resolved path is within the postsDirectory
+    if (!fullPath.startsWith(path.resolve(postsDirectory)) || !fs.existsSync(fullPath)) {
       return {};
     }
 
