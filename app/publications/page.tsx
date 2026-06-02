@@ -37,6 +37,7 @@ const Publications = () => {
           <div>
             <div className="mb-6 flex justify-end">
               <select
+                aria-label="Filter books by category"
                 value={bookCategory}
                 onChange={(e) => setBookCategory(e.target.value)}
                 className="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-white text-gray-700"
@@ -47,13 +48,14 @@ const Publications = () => {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {filteredBooks.map((book, index) => (
-                <div key={index} className="flex flex-col items-center text-center group cursor-pointer">
+              {filteredBooks.map((book) => (
+                <div key={book.title} className="flex flex-col items-center text-center group cursor-pointer">
                   <div className="relative h-64 w-44 mb-4 shadow-lg transition-transform duration-300 group-hover:scale-105">
                     <Image
                       src={book.image}
                       alt={book.title}
                       fill
+                      sizes="(max-width: 768px) 50vw, 25vw"
                       className="object-cover rounded-md"
                     />
                     <div className="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
@@ -73,11 +75,12 @@ const Publications = () => {
 
         {activeTab === "scientific" && (
           <div className="space-y-4">
-            {scientificArticles.map((article, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                <h3 className="font-bold text-xl text-primary mb-2">{article.title}</h3>
+            {scientificArticles.map((article) => (
+              <div key={article.title} className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                <p className="text-gray-700 mb-1">{article.authors} ({article.year}).</p>
+                <h3 className="font-bold text-xl text-primary mb-2">{article.title}.</h3>
                 <p className="text-gray-600">
-                  <span className="font-medium italic">{article.journal}</span>, {article.year}
+                  <span className="font-medium italic">{article.journal}</span>
                 </p>
               </div>
             ))}
@@ -86,8 +89,8 @@ const Publications = () => {
 
         {activeTab === "popular" && (
           <div className="space-y-4">
-            {popularArticles.map((article, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+            {popularArticles.map((article) => (
+              <div key={article.title} className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                 <h3 className="font-bold text-xl text-secondary mb-2">{article.title}</h3>
                 <p className="text-gray-600">
                   Published in <span className="font-medium">{article.publication}</span>, {article.year}

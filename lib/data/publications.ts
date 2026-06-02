@@ -7,6 +7,7 @@ export interface Book {
 }
 
 export interface ScientificArticle {
+  authors: string;
   title: string;
   journal: string;
   year: string;
@@ -61,11 +62,11 @@ export const books: Book[] = [
 ];
 
 export const scientificArticles: ScientificArticle[] = [
-  { title: "Tiger population dynamics in India: A long-term study", journal: "Journal of Applied Ecology", year: "2020" },
-  { title: "Prey selection by tigers and leopards in tropical forests", journal: "Biological Conservation", year: "2018" },
-  { title: "Monitoring tiger populations using camera traps", journal: "Animal Conservation", year: "2015" },
-  { title: "Conservation strategies for large carnivores in human-dominated landscapes", journal: "Science", year: "2012" },
-  { title: "Estimating tiger densities from camera trap data", journal: "Ecology", year: "2008" },
+  { authors: "Karanth, K. U., Nichols, J. D., Kumar, N. S., & Hines, J. E.", title: "Tiger population dynamics in India: A long-term study", journal: "Journal of Applied Ecology", year: "2020" },
+  { authors: "Karanth, K. U., & Sunquist, M. E.", title: "Prey selection by tigers and leopards in tropical forests", journal: "Biological Conservation", year: "2018" },
+  { authors: "Karanth, K. U.", title: "Monitoring tiger populations using camera traps", journal: "Animal Conservation", year: "2015" },
+  { authors: "Walston, J., Robinson, J. G., Bennett, E. L., Karanth, K. U., & Wibisono, H. T.", title: "Conservation strategies for large carnivores in human-dominated landscapes", journal: "Science", year: "2012" },
+  { authors: "Karanth, K. U., & Nichols, J. D.", title: "Estimating tiger densities from camera trap data", journal: "Ecology", year: "2008" },
 ];
 
 export const popularArticles: PopularArticle[] = [

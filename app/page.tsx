@@ -55,7 +55,7 @@ export default async function Home() {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-10 text-center text-primary">Species of Interest</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {speciesList.map((s) => (
+            {speciesList?.map((s) => (
               <div key={s.name} className="relative group overflow-hidden rounded-lg shadow-md cursor-pointer">
                 <div className="relative h-[300px] w-full">
                     <Image
@@ -88,8 +88,8 @@ export default async function Home() {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-10 text-center text-primary">Associated Institutions</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {institutions.map((inst, index) => (
-              <div key={index} className="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24 text-center">
+            {institutions?.map((inst) => (
+              <div key={inst} className="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24 text-center">
                 <span className="text-sm font-medium text-gray-600">{inst}</span>
               </div>
             ))}
@@ -105,6 +105,7 @@ export default async function Home() {
           <input
             type="email"
             placeholder="Enter your email"
+            aria-label="Email address"
             className="flex-grow px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
           />
           <button

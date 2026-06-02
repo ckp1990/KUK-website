@@ -48,8 +48,8 @@ export default function About() {
                     21, Vittal Mallya Road<br/>
                     Bengaluru, Karnataka-560001, INDIA.
                 </p>
-                <a href="mailto:info@wildlifescience.com" className="text-primary hover:underline font-medium block mt-2">
-                    info@wildlifescience.com
+                <a href="mailto:info@ullaskaranth.com" className="text-primary hover:underline font-medium block mt-2">
+                    info@ullaskaranth.com
                 </a>
             </div>
           </div>
