@@ -43,6 +43,7 @@ const Header = () => {
         <button
           className="md:hidden text-gray-700 focus:outline-none"
           onClick={toggleMenu}
+          aria-label="Toggle navigation menu"
         >
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>

@@ -94,32 +94,37 @@ function processFiles(filesToProcess, mapping) {
 }
 
 function main() {
-  if (!fs.existsSync(MAPPING_FILE)) {
-    console.error(`❌ Mapping file not found at ${MAPPING_FILE}. Please run 'npm run upload:images' first.`);
+  try {
+    if (!fs.existsSync(MAPPING_FILE)) {
+      console.error(`❌ Mapping file not found at ${MAPPING_FILE}. Please run 'npm run upload:images' first.`);
+      process.exit(1);
+    }
+
+    const mapping = JSON.parse(fs.readFileSync(MAPPING_FILE, 'utf8'));
+
+    if (Object.keys(mapping).length === 0) {
+      console.log("⚠️ Mapping file is empty. No URLs to update.");
+      return;
+    }
+
+    console.log("Scanning data and content files for required updates...\n");
+    console.log("Note: To use this script effectively, change your image paths in lib/data/*.ts");
+    console.log("to match your local_images paths (e.g., image: 'species/tiger.jpg').\n");
+
+    const dataFiles = getAllFiles(DATA_DIR);
+    const contentFiles = getAllFiles(CONTENT_DIR);
+    const allFilesToProcess = [...dataFiles, ...contentFiles];
+
+    const updatedCount = processFiles(allFilesToProcess, mapping);
+
+    if (updatedCount === 0) {
+      console.log("⚠️ No files were updated. Make sure your data files contain exact matches to your local image paths (e.g., 'species/tiger.jpg').");
+    } else {
+      console.log(`\n🎉 Successfully updated ${updatedCount} files with Cloudinary URLs!`);
+    }
+  } catch (error) {
+    console.error("❌ An unexpected error occurred in main():", error);
     process.exit(1);
-  }
-
-  const mapping = JSON.parse(fs.readFileSync(MAPPING_FILE, 'utf8'));
-
-  if (Object.keys(mapping).length === 0) {
-    console.log("⚠️ Mapping file is empty. No URLs to update.");
-    return;
-  }
-
-  console.log("Scanning data and content files for required updates...\n");
-  console.log("Note: To use this script effectively, change your image paths in lib/data/*.ts");
-  console.log("to match your local_images paths (e.g., image: 'species/tiger.jpg').\n");
-
-  const dataFiles = getAllFiles(DATA_DIR);
-  const contentFiles = getAllFiles(CONTENT_DIR);
-  const allFilesToProcess = [...dataFiles, ...contentFiles];
-
-  const updatedCount = processFiles(allFilesToProcess, mapping);
-
-  if (updatedCount === 0) {
-    console.log("⚠️ No files were updated. Make sure your data files contain exact matches to your local image paths (e.g., 'species/tiger.jpg').");
-  } else {
-    console.log(`\n🎉 Successfully updated ${updatedCount} files with Cloudinary URLs!`);
   }
 }
 

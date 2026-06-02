@@ -40,11 +40,11 @@ export const getSpecies = async (): Promise<Species[]> => {
       return getDefaultSpecies();
     }
 
-    const speciesList: Species[] = result.resources.map((resource: any) => {
+    const speciesList: Species[] = result.resources.map((resource: { display_name?: string; public_id: string; secure_url: string }) => {
       // Use display_name (e.g. "Tiger.png" or "Tiger") or fallback to public_id
       const rawName = resource.display_name
         ? resource.display_name.replace(/\.[^/.]+$/, "") // Remove file extension like .png or .jpg
-        : resource.public_id.split("/").pop(); // Get last part of public_id
+        : resource.public_id.split("/").pop() || "Unknown"; // Get last part of public_id
 
       // Format the name: "snow_leopard" -> "Snow Leopard", "Tiger" -> "Tiger"
       const formattedName = rawName

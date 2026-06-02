@@ -33,13 +33,14 @@ export default function MediaGallery() {
       <div className="min-h-[400px]">
         {activeTab === "photos" && (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {photos.map((img, index) => (
-              <div key={index} className="relative group overflow-hidden rounded-lg shadow-lg cursor-pointer">
+            {photos.map((img) => (
+              <div key={img.src} className="relative group overflow-hidden rounded-lg shadow-lg cursor-pointer">
                 <div className="relative h-64 w-full">
                   <Image
                     src={img.src}
                     alt={img.alt}
                     fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
@@ -55,9 +56,9 @@ export default function MediaGallery() {
 
         {activeTab === "audio" && (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {audioItems.map((item, index) => (
+            {audioItems.map((item) => (
               <a
-                key={index}
+                key={item.title}
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -68,6 +69,7 @@ export default function MediaGallery() {
                     src={item.image}
                     alt={item.title}
                     fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 group-hover:bg-opacity-40 transition-all">
@@ -87,9 +89,9 @@ export default function MediaGallery() {
 
         {activeTab === "video" && (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {videoItems.map((item, index) => (
+            {videoItems.map((item) => (
               <a
-                key={index}
+                key={item.title}
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -100,6 +102,7 @@ export default function MediaGallery() {
                     src={item.image}
                     alt={item.title}
                     fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 group-hover:bg-opacity-40 transition-all">
